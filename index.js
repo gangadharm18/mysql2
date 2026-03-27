@@ -12,3 +12,6 @@ app.get('/',(req,res)=>{
     res.send("HELLO WORLD!")
 })
 app.use('/students',studentRoute)
+app.use((req,res)=>{
+    res.status(404).send("page not Found")
+})
