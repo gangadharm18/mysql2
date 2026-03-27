@@ -3,10 +3,17 @@ const db=require('./utils/db-connection')
 const app=express()
 app.use(express.json())
 const studentRoute=require('./routes/studentRoute')
+//models
+const studentModel=require('./models/student')
 
-app.listen(3000,()=>{
+db.sync({force:true}).then(()=>{
+    app.listen(3000,()=>{
     console.log("listening to server")
 
+})
+
+}).catch((err)=>{
+    console.log(err)
 })
 app.get('/',(req,res)=>{
     res.send("HELLO WORLD!")
