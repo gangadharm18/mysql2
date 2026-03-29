@@ -1,5 +1,6 @@
 const db=require('../utils/db-connection')
 const student=require('../models/student')
+const identityCard=require('../models/identitycard')
 
 const addstudent=async(req,res)=>{
     try {
@@ -9,7 +10,7 @@ const addstudent=async(req,res)=>{
             email:email,
           
         })
-          res.status(200).send(`student ${name} added`)
+          res.status(201).send(`student ${name} added`)
     } catch (error) {
          res.status(500).send(error.message)
          return;
@@ -75,10 +76,25 @@ const getStudent=async(req,res)=>{
     }
 
 }
+//
+const addstudentAndId=async(req,res)=>{
+    try {
+        const Student=await student.create(req.body.Student)
+        const IdCard=await identityCard.create({
+            ...req.body.identityCard,
+            studentId:Student.id
+        })
+        res.status(201).json({Student,IdCard})
+    } catch (error) {
+        res.status(500).send(error.message)
+    }
+
+}
 
 module.exports={
     addstudent,
     updatestudent,
     deleteStudent,
-    getStudent
+    getStudent,
+    addstudentAndId
 }

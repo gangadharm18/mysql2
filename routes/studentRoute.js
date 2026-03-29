@@ -6,5 +6,6 @@ router.post('/',studentController.addstudent)
 router.put('/:id',studentController.updatestudent)
 router.delete('/:id',studentController.deleteStudent)
 router.get('/',studentController.getStudent)
+router.post('/both',studentController.addstudentAndId)
 
 module.exports=router;

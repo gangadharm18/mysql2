@@ -4,7 +4,7 @@ const app=express()
 app.use(express.json())
 const studentRoute=require('./routes/studentRoute')
 //models
-const studentModel=require('./models/student')
+require('./models')
 
 db.sync({force:true}).then(()=>{
     app.listen(3000,()=>{
